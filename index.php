@@ -1,4 +1,5 @@
 <?php
+$result = "0";
 if($_GET['action'] == "C") {
     $result = 0;
 } elseif($_GET['action'] == "=") {
@@ -14,7 +15,7 @@ if($_GET['action'] == "C") {
         } elseif(is_numeric($val) && !is_null($operator)) {
             $secondValue = $secondValue . $val;
         } elseif(!is_numeric($val) && !is_null($secondValue)) {
-            $expression = intval($firstValue).$operator.intval($secondValue);
+            $expression = (float)$firstValue.$operator.(float)$secondValue;
             $result = eval("return $expression;");
             $firstValue = $result;
             $secondValue = null;
@@ -24,7 +25,6 @@ if($_GET['action'] == "C") {
         }
     }
 }
-
 ?>
 
 <meta charset="UTF-8">
@@ -60,11 +60,6 @@ if($_GET['action'] == "C") {
 <script>
     let userInput = document.getElementById('hidden_field').value;
     document.getElementById('main').onclick = function () {
-        // if(event.target.id === "reset") {
-        //     userInput = ""
-        //     document.getElementById('hidden_field').value = userInput
-        //     return
-        // }
         if(event.target.className.includes('calculator__button')) {
             userInput = userInput + event.target.textContent.toString()
             document.getElementById('hidden_field').value = userInput
