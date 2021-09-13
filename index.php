@@ -7,7 +7,6 @@ if($_GET['action'] == "C") {
     $array = str_split($userInput);
     $array[] = "=";
 
-    $result = 0;
     $firstValue = $secondValue = $operator = null;
     foreach ($array as $val) {
         if(is_numeric($val) && is_null($operator)) {
